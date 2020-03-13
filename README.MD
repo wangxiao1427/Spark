@@ -8,11 +8,11 @@
 安装完成之后，先设置环境变量，将scala安装目录的bin目录添加到path系统变量中，然后使用scala命令验证安装结果
 
 3. 安装Spark，http://spark.apache.org/
-此处我们选择Spark-2.2.0-bin-hadoop2.7.tgz，解压后将Spark/bin的所在目录添加到path系统变量中，完成之后，此时如果用spark-shell命令验证安装是否成功会报错，
+此处我们选择Spark-2.2.0-bin-hadoop2.7.tgz，解压后添加SPARK_HOME环境变量，变量值为spark安装目录；将Spark/bin的所在目录添加到path系统变量中，完成之后，此时如果用spark-shell命令验证安装是否成功会报错，
 是因为还缺少了hadoop组件
 
 4. 安装Hadoop，https://archive.apache.org/dist/hadoop/common/
-选择的hadoop版本需要和第3步的spark匹配，所以此处选择hadoop2.7.0，下载解压后将hadoop/bin目录添加到path系统环境变量中
+选择的hadoop版本需要和第3步的spark匹配，所以此处选择hadoop2.7.0，下载解压后添加HAOOP_HOME环境变量，变量值为hadoop安装目录；将hadoop/bin目录添加到path系统环境变量中
 
 上述完成之后使用spark-shell命令测试spark/hadoop是否安装成功，过程中可能会遇到的问题：  
 * spark-shell命令报空指针问题  
@@ -27,3 +27,13 @@ PATHONPATH=%SPARK_HOME%\python;%SPARK_HOME%\python\lib\py4j-0.10.8.1-src.zip
 2. 安装pip install py4j
 
 3. 安装pip install pyspark
+
+4. 示例代码
+    ```
+      from pyspark import SparkConf, SparkContext
+      conf = SparkConf().setMaster("local").setAppName("My App")
+
+      sc = SparkContext(conf=conf)
+      rdd = sc.parallelize(list(range(100)))
+      print(rdd.collect())
+    ```
