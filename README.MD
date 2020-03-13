@@ -32,7 +32,10 @@ PATHONPATH=%SPARK_HOME%\python;%SPARK_HOME%\python\lib\py4j-0.10.8.1-src.zip
     ```
       from pyspark import SparkConf, SparkContext
       conf = SparkConf().setMaster("local").setAppName("My App")
-
+      '''可能遇到的问题：
+         Error: Could not find valid SPARK_HOME while searching: 
+         问题原因是，读取不到环境变量SPARK_HOME，请检查环境变量是否设置了SPARK_HOME
+      '''
       sc = SparkContext(conf=conf)
       rdd = sc.parallelize(list(range(100)))
       print(rdd.collect())
