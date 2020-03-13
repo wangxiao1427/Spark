@@ -3,7 +3,7 @@ conf = SparkConf().setMaster("local").setAppName("My App")
 
 sc = SparkContext(conf=conf)
 def dag_calc(sc):
-    '''构建DAG(有向无环图)计算流程
+    '''构建DAG(有向无环图)调度流程
           ---> b --->
     a--->|          |---> d
           ---> c --->
